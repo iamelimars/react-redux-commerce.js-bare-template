@@ -2,21 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import { handleAddToCart } from "../actions/cartActions";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Product = ({
   product,
   // addToCart
 }) => {
   const dispatch = useDispatch();
-  const { assets, media, name, price, id } = product;
+  const { assets, media, name, price, id, permalink } = product;
   return (
     <Card>
       <img src={media.source} alt="" width="200px" />
-      <h1>{name}</h1>
+      <Link to={`/product/${permalink}`}>
+        <h1>{name}</h1>
+      </Link>
       <h2>{price.formatted_with_symbol}</h2>
-      <button onClick={() => dispatch(handleAddToCart(id, 1))}>
-        Add To Cart
-      </button>
     </Card>
   );
 };

@@ -75,13 +75,13 @@ export const handleUpdateCartQty = (lineItemId, quantity) => async (
     });
   }
 };
-export const handleAddToCart = (productId, quantity) => async (
+export const handleAddToCart = (productId, quantity, variant = {}) => async (
   dispatch,
   getState
 ) => {
   try {
     dispatch({ type: "ADD_TO_CART_START" });
-    const newCart = await commerce.cart.add(productId, quantity);
+    const newCart = await commerce.cart.add(productId, quantity, variant);
 
     dispatch({
       type: "ADD_TO_CART_SUCCESS",

@@ -9,8 +9,8 @@ import Nav from "../components/Nav";
 import Confirmation from "./confirmation";
 import Login from "./login";
 import Dashboard from "./dashboard";
+import Product from "./product";
 const App = () => {
-  const [cart, setCart] = useState({});
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,6 +24,9 @@ const App = () => {
         <Nav />
         <Cart />
         <Switch>
+          <Route path="/product/:permalink">
+            <Product />
+          </Route>
           <Route path="/login">
             <Login />
           </Route>
@@ -34,7 +37,7 @@ const App = () => {
             <Confirmation />
           </Route>
           <Route path="/checkout">
-            <Checkout cart={cart} />
+            <Checkout />
           </Route>
           <Route exact path="/">
             <Products />
