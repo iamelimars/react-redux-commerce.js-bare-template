@@ -1,11 +1,30 @@
 const initialState = {
   customer: {},
   isLoading: false,
+  orders: [],
+  isOrdersLoading: false,
   error: null,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "GET_ORDERS_START":
+      return {
+        ...state,
+        isOrdersLoading: true,
+      };
+    case "GET_ORDERS_SUCCESS":
+      return {
+        ...state,
+        orders: action.payload,
+        isOrdersLoading: false,
+      };
+    case "GET_ORDERS_ERROR":
+      return {
+        ...state,
+        error: action.payload,
+        isOrdersLoading: false,
+      };
     case "GET_TOKEN_START":
     case "LOGOUT_START":
     case "LOGIN_EMAIL_START":

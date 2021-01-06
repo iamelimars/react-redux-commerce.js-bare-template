@@ -50,11 +50,17 @@ const Checkout = () => {
   });
 
   const captureCheckout = (e) => {
-    // e.stopPropagation();
-    // e.nativeEvent.stopImmediatePropagation();
-    // e.preventDefault();
+    const line_items = checkoutToken.live.line_items.reduce((obj, lineItem) => {
+      const variants = lineItem.variants.reduce((obj, variant) => {
+        obj[variant.variant_id] = variant.option_id;
+        return obj;
+      }, {});
+      obj[lineItem.id] = { ...lineItem, variants };
+      return obj;
+    }, {});
     const orderData = {
-      line_items: checkoutToken.live.line_items,
+      // line_items: checkoutToken.live.line_items,
+      line_items,
       customer: {
         firstName: formData.firstName,
         lastName: formData.lastName,
@@ -85,8 +91,6 @@ const Checkout = () => {
     console.log(orderData);
 
     dispatch(handleCaptureCheckout(orderData)).then((res) => {
-      console.log("Order Confirmed");
-      console.log("Success", res);
       if (res.success === true) {
         history.push("/confirmation");
       } else {

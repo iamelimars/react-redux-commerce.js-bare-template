@@ -10,6 +10,7 @@ import Confirmation from "./confirmation";
 import Login from "./login";
 import Dashboard from "./dashboard";
 import Product from "./product";
+import Order from "./order";
 const App = () => {
   const dispatch = useDispatch();
 
@@ -24,6 +25,9 @@ const App = () => {
         <Nav />
         <Cart />
         <Switch>
+          <Route path="/order/:orderId">
+            <Order />
+          </Route>
           <Route path="/product/:permalink">
             <Product />
           </Route>
